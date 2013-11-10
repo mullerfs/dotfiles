@@ -48,6 +48,6 @@ unset config_files
 export ZSH_THEME="gnzh"
 
 #Plugins
-plugins=(git rbenv)
+plugins=(git rbenv web-search urltools extract kate)
 
 source $ZSH/enablers/oh_my_zsh/oh-my-zsh.sh

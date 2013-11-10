@@ -14,6 +14,20 @@ function web_search() {
   if [[ ! $1 =~ '(google|bing|yahoo|duckduckgo)' ]];
   then
     echo "Search engine $1 not supported."
+    echo -e "\nThis program create the below alias "
+    echo -e "bing\t SEARCH_TERM"
+    echo -e  "google\t SEARCH_TERM"
+    echo -e  "yahoo\t SEARCH_TERM"
+    echo -e  "ddg\t SEARCH_TERM"
+    echo -e  "wiki\t SEARCH_TERM"
+    echo -e  "news\t SEARCH_TERM"
+    echo -e  "youtube\t SEARCH_TERM"
+    echo -e  "map\t SEARCH_TERM"
+    echo -e  "image\t SEARCH_TERM"
+    echo -e  "ducky\t SEARCH_TERM"
+    
+    
+    
     return 1
   fi
 
