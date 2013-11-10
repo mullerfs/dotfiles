@@ -49,5 +49,5 @@ export ZSH_THEME="gnzh"
 
 #Plugins
 plugins=(git rbenv)
-enablers/oh_my_zsh
+
 source $ZSH/enablers/oh_my_zsh/oh-my-zsh.sh
