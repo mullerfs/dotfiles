@@ -1,5 +1,8 @@
+
+###################### dotfiles ######################
+
 # shortcut to this dotfiles path is $ZSH
-export ZSH=$HOME/.dotfiles
+export ZSH=$HOME/dotfiles
 
 # your project folder that we can `c [tab]` to
 export PROJECTS=~/Code
@@ -15,14 +18,14 @@ fi
 typeset -U config_files
 config_files=($ZSH/**/*.zsh)
 
-# load the path files
-for file in ${(M)config_files:#*/path.zsh}
+# load the path files except those on the enablers directory
+for file in ${${(M)config_files:#*/path.zsh}:#$ZSH/enablers*}
 do
   source $file
 done
 
-# load everything but the path and completion files
-for file in ${${config_files:#*/path.zsh}:#*/completion.zsh}
+# load everything but the path and completion files and the enablers directory
+for file in ${${${config_files:#*/path.zsh}:#*/completion.zsh}:#$ZSH/enablers*}
 do
   source $file
 done
@@ -31,10 +34,20 @@ done
 autoload -U compinit
 compinit
 
-# load every completion after autocomplete loads
-for file in ${(M)config_files:#*/completion.zsh}
+# load every completion after autocomplete loads except from the enablers directory
+for file in ${${(M)config_files:#*/completion.zsh}:#$ZSH/enablers*}
 do
   source $file
 done
 
 unset config_files
+
+
+###################### oh-my-zsh ######################
+#Theme
+export ZSH_THEME="gnzh"
+
+#Plugins
+plugins=(git rbenv)
+
+source $ZSH/enablers/oh-my-zsh/oh-my-zsh.sh
