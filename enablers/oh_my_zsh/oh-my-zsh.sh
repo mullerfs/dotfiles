@@ -1,24 +1,27 @@
 # Check for updates on initial load...
+
+oh_my_zsh_home="$ZSH/enablers/oh-my-zsh"
+
 if [ "$DISABLE_AUTO_UPDATE" != "true" ]
 then
-  /usr/bin/env ZSH=$ZSH DISABLE_UPDATE_PROMPT=$DISABLE_UPDATE_PROMPT zsh $ZSH/tools/check_for_upgrade.sh
+  /usr/bin/env ZSH=$ZSH DISABLE_UPDATE_PROMPT=$DISABLE_UPDATE_PROMPT zsh $oh_my_zsh_home/tools/check_for_upgrade.sh
 fi
 
 # Initializes Oh My Zsh
 
 # add a function path
-fpath=($ZSH/functions $ZSH/completions $fpath)
+fpath=($oh_my_zsh_home/functions $oh_my_zsh_home/completions $fpath)
 
 # Load all of the config files in ~/oh-my-zsh that end in .zsh
 # TIP: Add files you don't want in git to .gitignore
-for config_file ($ZSH/lib/*.zsh); do
+for config_file ($oh_my_zsh_home/lib/*.zsh); do
   source $config_file
 done
 
 # Set ZSH_CUSTOM to the path where your custom config files
 # and plugins exists, or else we will use the default custom/
 if [[ -z "$ZSH_CUSTOM" ]]; then
-    ZSH_CUSTOM="$ZSH/custom"
+    ZSH_CUSTOM="$oh_my_zsh_home/custom"
 fi
 
 
@@ -33,8 +36,8 @@ is_plugin() {
 for plugin ($plugins); do
   if is_plugin $ZSH_CUSTOM $plugin; then
     fpath=($ZSH_CUSTOM/plugins/$plugin $fpath)
-  elif is_plugin $ZSH $plugin; then
-    fpath=($ZSH/plugins/$plugin $fpath)
+  elif is_plugin $oh_my_zsh_home $plugin; then
+    fpath=($oh_my_zsh_home/plugins/$plugin $fpath)
   fi
 done
 
@@ -57,8 +60,8 @@ compinit -i -d "${ZSH_COMPDUMP}"
 for plugin ($plugins); do
   if [ -f $ZSH_CUSTOM/plugins/$plugin/$plugin.plugin.zsh ]; then
     source $ZSH_CUSTOM/plugins/$plugin/$plugin.plugin.zsh
-  elif [ -f $ZSH/plugins/$plugin/$plugin.plugin.zsh ]; then
-    source $ZSH/plugins/$plugin/$plugin.plugin.zsh
+  elif [ -f $oh_my_zsh_home/plugins/$plugin/$plugin.plugin.zsh ]; then
+    source $oh_my_zsh_home/plugins/$plugin/$plugin.plugin.zsh
   fi
 done
 
@@ -71,7 +74,7 @@ unset config_file
 # Load the theme
 if [ "$ZSH_THEME" = "random" ]
 then
-  themes=($ZSH/themes/*zsh-theme)
+  themes=($oh_my_zsh_home/themes/*zsh-theme)
   N=${#themes[@]}
   ((N=(RANDOM%N)+1))
   RANDOM_THEME=${themes[$N]}
@@ -87,7 +90,7 @@ else
     then
       source "$ZSH_CUSTOM/themes/$ZSH_THEME.zsh-theme"
     else
-      source "$ZSH/themes/$ZSH_THEME.zsh-theme"
+      source "$oh_my_zsh_home/themes/$ZSH_THEME.zsh-theme"
     fi
   fi
 fi
