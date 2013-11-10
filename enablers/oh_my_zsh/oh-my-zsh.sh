@@ -1,6 +1,6 @@
 # Check for updates on initial load...
 
-oh_my_zsh_home="$ZSH/enablers/oh-my-zsh"
+oh_my_zsh_home="$ZSH/enablers/oh_my_zsh"
 
 if [ "$DISABLE_AUTO_UPDATE" != "true" ]
 then
